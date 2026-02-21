@@ -1,11 +1,12 @@
 import {atom} from 'jotai'
 import {nanoid} from 'nanoid'
+import {atomWithStorage} from 'jotai/utils'
 
-export const todosAtom = atom([])
+export const todosAtom = atomWithStorage("todos",[])
 
 export const addTodoAtom = atom(null, (get, set, text) => {
   const currentTodos = get(todosAtom)
-  set(todosAtom, [...currentTodos,{id:nanoid(), text, completed:false}])
+  set(todosAtom, [{id:nanoid(), text, completed:false},...currentTodos])
 })
 
 export const removeTodoAtom = atom(null, (get, set, index) => {
@@ -33,7 +34,7 @@ export const editTodoAtom = atom(null, (get, set, {id, text}) => {
     }))
 })
 
-export const filterModeAtom = atom('all')
+export const filterModeAtom = atomWithStorage("filtermode",'all')
 
 export const fileteredTodosAtom = atom((get) => {
   const todos = get(todosAtom)
