@@ -1,9 +1,10 @@
 import { useState } from "react"
-import { addTodoAtom } from "../atoms"
+import { addTodoAtom,filterModeAtom } from "../atoms"
 import {useAtom} from "jotai"
 function Input() {
     const [input, setInput] = useState('')
     const [, addTodo] = useAtom(addTodoAtom)
+    const[,setmode]=useAtom(filterModeAtom)
   return (
     <div>
         <div>
@@ -16,6 +17,12 @@ function Input() {
                 setInput('')
                 console.log(input)
             } }>Add</button>
+
+            <div>
+                <button onClick={() => setmode("all")}>All</button>
+                <button onClick={() => setmode("completed")}>Completed</button>
+                <button onClick={() => setmode("active")}>Pending</button>
+            </div>
         </div>
     </div>
   )

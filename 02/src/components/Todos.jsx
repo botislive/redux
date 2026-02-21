@@ -1,14 +1,14 @@
 import { useAtom } from "jotai"
 import {
-  todosAtom,
   removeTodoAtom,
   toggleTodoAtom,
   editTodoAtom,
+  fileteredTodosAtom
 } from "../atoms"
 import { useState } from "react"
 
 function Todos() {
-  const [todos] = useAtom(todosAtom)
+  const [filteredTodos] = useAtom(fileteredTodosAtom)
   const [, deleteTodo] = useAtom(removeTodoAtom)
   const [, toggleTodo] = useAtom(toggleTodoAtom)
   const [, editTodo] = useAtom(editTodoAtom)
@@ -26,7 +26,7 @@ function Todos() {
       <h1>Todos</h1>
 
       <ul>
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           <li key={todo.id}>
 
             {editingId === todo.id ?

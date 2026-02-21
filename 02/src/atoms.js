@@ -33,3 +33,18 @@ export const editTodoAtom = atom(null, (get, set, {id, text}) => {
     }))
 })
 
+export const filterModeAtom = atom('all')
+
+export const fileteredTodosAtom = atom((get) => {
+  const todos = get(todosAtom)
+  const filterMode = get(filterModeAtom)
+  switch (filterMode) {
+    case 'active':
+      return todos.filter((todo) => !todo.completed)
+    case 'completed':
+      return todos.filter((todo) => todo.completed)
+    default:
+      return todos
+  }
+})
+
